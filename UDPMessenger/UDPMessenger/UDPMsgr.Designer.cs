@@ -161,6 +161,7 @@
             this.Controls.Add(this.label_ListenPort);
             this.Name = "UDPMsgr";
             this.Text = "UDP即時通";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UDPMsgr_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
