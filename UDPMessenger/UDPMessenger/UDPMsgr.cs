@@ -32,10 +32,15 @@ namespace UDPMessenger
             button_StartReceive.Enabled = false; //使按鍵失效，不能(也不需要)重複開啟監聽
         }
 
-        //傳送
+        //發送UDP訊息
         private void button_Transfer_Click(object sender, EventArgs e)
         {
-
+            string IP = textBox_TargetIP.Text; //設定發送目標IP
+            int Port = int.Parse(textBox_TargetPort.Text); //設定發送目標Port
+            byte[] B = Encoding.Default.GetBytes(textBox_TransferMsg.Text); //字串翻譯成位元組陣列
+            UdpClient S = new UdpClient(); //建立UDP通訊器
+            S.Send(B, B.Length, IP, Port); //發送資料到指定位置
+            S.Close(); //關閉通訊器
         }
 
         //監聽副程序
