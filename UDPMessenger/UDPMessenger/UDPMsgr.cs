@@ -23,6 +23,12 @@ namespace UDPMessenger
             InitializeComponent();
         }
 
+        //表單載入
+        private void UDPMsgr_Load(object sender, EventArgs e)
+        {
+            this.Text += " " + MyIP(); //顯示本機IP於標題列
+        }
+
         //啟動接收
         private void button_StartReceive_Click(object sender, EventArgs e)
         {
@@ -69,6 +75,22 @@ namespace UDPMessenger
             {
                 //忽略錯誤
             }
+        }
+
+        //找出本機IP
+        private string MyIP() 
+        {
+            string hn = Dns.GetHostName(); //取得本機電腦名稱
+            IPAddress[] ip = Dns.GetHostEntry(hn).AddressList; //取得本機IP陣列(可能有多個)
+            foreach(IPAddress it in ip) 
+            {
+                if(it.AddressFamily == AddressFamily.InterNetwork) //如果是IPv4格式
+                {
+                    return it.ToString(); //回傳此IP字串
+                }
+            }
+
+            return ""; //找不到合格IP，回傳空字串
         }
     }
 }
